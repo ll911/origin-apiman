@@ -8,8 +8,9 @@ ENV HOME=/opt/origin/builder
 WORKDIR ${HOME}
 
 RUN yum install -y --setopt=tsflags=nodocs \
-                java-1.8.0-openjdk java-1.8.0-openjdk-devel docker jq && \
+                java-1.8.0-openjdk java-1.8.0-openjdk-devel docker && \
     yum clean all
+RUN wget -O /usr/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && chmod 755 /usr/bin/jq
 ADD install.sh ${HOME}/
 RUN ${HOME}/install.sh
 
